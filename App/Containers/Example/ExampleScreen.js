@@ -1,11 +1,12 @@
 import React from 'react'
-import { Platform, Text, View, Button, ActivityIndicator, Image } from 'react-native'
+import { Platform, View, Button, ActivityIndicator, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import ExampleActions from 'App/Stores/Example/Actions'
 import { liveInEurope } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
 import { Images } from 'App/Theme'
+import { Layout, Text } from 'react-native-ui-kitten';
 
 /**
  * This is an example of a container component.
@@ -26,7 +27,7 @@ class ExampleScreen extends React.Component {
 
   render() {
     return (
-      <View style={Style.container}>
+      <Layout style={Style.container}>
         {this.props.userIsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
@@ -52,7 +53,7 @@ class ExampleScreen extends React.Component {
             <Button onPress={() => this._fetchUser()} title="Refresh" />
           </View>
         )}
-      </View>
+      </Layout>
     )
   }
   

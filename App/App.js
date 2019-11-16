@@ -3,6 +3,8 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
+import { mapping, dark as lightTheme } from '@eva-design/eva'
+import { ApplicationProvider, Layout, Text } from 'react-native-ui-kitten'
 
 const { store, persistor } = createStore()
 
@@ -21,7 +23,9 @@ export default class App extends Component {
          * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
          */}
         <PersistGate loading={null} persistor={persistor}>
-          <RootScreen />
+          <ApplicationProvider mapping={mapping} theme={lightTheme}>
+            <RootScreen />
+          </ApplicationProvider>
         </PersistGate>
       </Provider>
     )
