@@ -7,14 +7,7 @@ import { liveInEurope } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
 import { Images } from 'App/Theme'
 import { Layout, Text } from 'react-native-ui-kitten';
-import i18n from "i18n-js";
-import memoize from "lodash.memoize";
-
-const translate = memoize(
-  (key, config) => i18n.t(key, config),
-  (key, config) => (config ? key + JSON.stringify(config) : key)
-);
-
+import { translate } from 'App/I18n'
 
 /**
  * This is an example of a container component.
