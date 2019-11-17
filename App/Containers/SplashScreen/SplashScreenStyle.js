@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import Colors from 'App/Theme/Colors'
 import ApplicationStyles from 'App/Theme/ApplicationStyles'
 
 export default StyleSheet.create({
@@ -7,15 +6,15 @@ export default StyleSheet.create({
     ...ApplicationStyles.screen.container,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.primary,
+    alignItems: 'center'
+  },
+  logoContainer: {
+    width: '100%',
+    height: 300,
+    marginBottom: 25,
   },
   logo: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 70,
-    width: 70,
-    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
   },
 })

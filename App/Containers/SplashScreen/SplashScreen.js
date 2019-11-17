@@ -1,16 +1,17 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View, Image } from 'react-native'
 import styles from './SplashScreenStyle'
+import { Layout, Text } from 'react-native-ui-kitten'
+import { Images } from 'App/Theme'
 
 export default class SplashScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.logo}>
-          {/* You will probably want to insert your logo here */}
-          <Text>LOGO</Text>
+      <Layout style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={Images.logo} resizeMode={'contain'} />
         </View>
-      </View>
+      </Layout>
     )
   }
 }

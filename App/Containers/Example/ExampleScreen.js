@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, View, Button, ActivityIndicator, Image } from 'react-native'
+import { View, Button, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import ExampleActions from 'App/Stores/Example/Actions'
@@ -7,6 +7,14 @@ import { liveInEurope } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
 import { Images } from 'App/Theme'
 import { Layout, Text } from 'react-native-ui-kitten';
+import i18n from "i18n-js";
+import memoize from "lodash.memoize";
+
+const translate = memoize(
+  (key, config) => i18n.t(key, config),
+  (key, config) => (config ? key + JSON.stringify(config) : key)
+);
+
 
 /**
  * This is an example of a container component.
@@ -15,14 +23,10 @@ import { Layout, Text } from 'react-native-ui-kitten';
  * Feel free to remove it.
  */
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu.',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu.',
-})
-
 class ExampleScreen extends React.Component {
-  componentDidMount() {
-    this._fetchUser()
+
+  constructor(props) {
+    super(props);
   }
 
   render() {
@@ -31,32 +35,28 @@ class ExampleScreen extends React.Component {
         {this.props.userIsLoading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
-          <View>
-            <View style={Style.logoContainer}>
-              <Image style={Style.logo} source={Images.logo} resizeMode={'contain'} />
+            <View>
+              <Text style={Style.instructions}>{translate("welcome")}</Text>
+              {this.props.userErrorMessage ? (
+                <Text style={Style.error}>{this.props.userErrorMessage}</Text>
+              ) : (
+                  <View>
+                    <Text style={Style.result}>
+                      {"I'm a fake user, my name is "}
+                      {this.props.user.name}
+                    </Text>
+                    <Text style={Style.result}>
+                      {this.props.liveInEurope ? 'I live in Europe !' : "I don't live in Europe."}
+                    </Text>
+                  </View>
+                )}
+              <Button onPress={() => this._fetchUser()} title="Refresh" />
             </View>
-            <Text style={Style.text}>To get started, edit App.js</Text>
-            <Text style={Style.instructions}>{instructions}</Text>
-            {this.props.userErrorMessage ? (
-              <Text style={Style.error}>{this.props.userErrorMessage}</Text>
-            ) : (
-              <View>
-                <Text style={Style.result}>
-                  {"I'm a fake user, my name is "}
-                  {this.props.user.name}
-                </Text>
-                <Text style={Style.result}>
-                  {this.props.liveInEurope ? 'I live in Europe !' : "I don't live in Europe."}
-                </Text>
-              </View>
-            )}
-            <Button onPress={() => this._fetchUser()} title="Refresh" />
-          </View>
-        )}
+          )}
       </Layout>
     )
   }
-  
+
   _fetchUser() {
     this.props.fetchUser()
   }
