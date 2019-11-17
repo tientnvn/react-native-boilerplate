@@ -8,6 +8,7 @@ import Style from './ExampleScreenStyle'
 import { Images } from 'App/Theme'
 import { Layout, Text } from 'react-native-ui-kitten';
 import { translate } from 'App/I18n'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 /**
  * This is an example of a container component.
@@ -30,6 +31,7 @@ class ExampleScreen extends React.Component {
         ) : (
             <View>
               <Text style={Style.instructions}>{translate("welcome")}</Text>
+              <Icon name="rocket" size={30} color="#900" />
               {this.props.userErrorMessage ? (
                 <Text style={Style.error}>{this.props.userErrorMessage}</Text>
               ) : (
